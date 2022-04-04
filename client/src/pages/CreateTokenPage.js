@@ -15,22 +15,29 @@ export const CreateTokenPage = () => {
 	
 	const {loading, request} = useHttp()
 	
-	const {token} = useContext(LoginContext)
+	const {token, userId} = useContext(LoginContext)
 	
 	const auth = useContext(LoginContext)
 	
-	const delToken = useCallback(async (tokenid) => {
-		console.log(tokenid)
+	const checkStatus = useCallback( async () => {
 		try{
-			const fetched = await request('/api/token/delete', 'POST', {token_id: tokenid}, {
+			const fetched = await request('/api/auth/getnickname', 'GET', null, {
 				Authorization: `Bearer ${token}`
 			})
+			
+			if(fetched.user_status !== 'admin'){
+				return navigate('/undefined-page')
+			}
 			
 			return fetchTokens()
 		} catch(e) {
 			console.log(e)
 		}
 	}, [token, request])
+	
+	useEffect( () => {
+		checkStatus()
+	}, [])
 	
 	const fetchTokens = useCallback( async () => {
 		try{
@@ -45,14 +52,14 @@ export const CreateTokenPage = () => {
 		}
 	}, [token, request])
 	
-	useEffect( () => {
-		fetchTokens()
-	}, [fetchTokens])
-	
 	const generateToken = () => {
 		const token = randomize('AAAA0', 10)
 		$('.collection').append(`<li class="collection-item"><div>${token}<a href="#!" class="secondary-content"></a></div></li>`)
 		return token
+	}
+	
+	if(loading){
+		return <Loader/>
 	}
 	
 	const addToken = async () => {
@@ -72,22 +79,13 @@ export const CreateTokenPage = () => {
 	
 	$(document).ready(function() 
 	{
-		$('.li-copy-btn').click(function(e) 
+		$('.li-redact-btn').click(function(e) 
 		{ 
-			var text = $(e.target).closest(".collection-item").text();
-			navigator.clipboard.writeText(text);
-		})
-		
-		$('.li-del-btn').click(function(e) {  
 			e.preventDefault()
 			var this_id = $(this).attr('id')
-			delToken(this_id)
-		});
+			navigate(`/tokenredact/${this_id}`)
+		})
 	})
-	
-	if(loading) {
-		return <Loader />
-	}
 	
 	return(
 		<div className="register-main container">

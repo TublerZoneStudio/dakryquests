@@ -54,7 +54,9 @@ export const TableCard = ({ table }) => {
 					<table id="table" className="striped ">
 					
 					</table>
-					<button id="decompile-btn" className="btn amber lighten-1 waves-effect waves-light" onClick={decompileTable}>Показать таблицу</button> 
+				</div>
+				<div style={{ color: "var(--rcolor)", padding: "15px"}}>
+					{table.desc} 
 				</div>
 			</div>
 		</>

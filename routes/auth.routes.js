@@ -49,11 +49,11 @@ router.post(
     }
  
     const hashedPassword = await bcrypt.hash(password, 12)
-    const user = new User({ email, nickname, password: hashedPassword })
+    const user = new User({ email, nickname, password: hashedPassword, user_status: isToken.token_type })
 	
     await user.save()
-
-    res.status(201).json({ message: 'Пользователь создан!' })
+	
+    return res.json({ message: 'Пользователь создан!' })
 
   } catch (e) {
     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
@@ -97,12 +97,34 @@ router.post(
 			{ expiresIn: '1h'}
 		)
 		
-		res.json({token, userId: user.id})		
+		res.json({token, userId: user.id, admin_status: user.admin_status})		
 		
 
 	} catch (e) {
 		res.status(500).json({ message: "Что-то пошло не так. Попробуйте снова" })
 	}
+})
+
+router.post('/update-user-tokens', auth, async (req, res) => {
+  try {
+	const {user_id, tokens_num} = req.body 
+	 
+	await User.findByIdAndUpdate(user_id, {tokens: tokens_num })
+	
+	return res.status(301).json(tokens_num)
+	
+  } catch (e) {
+    res.status(500).json({ message: e })
+  }
+})
+
+router.get('/get-participants', auth, async (req, res) => {
+  try {
+    const users = await User.find({ user_status: "participant" })
+    res.json(users)
+  } catch (e) {
+    res.status(500).json({ message: e })
+  }
 })
 
 router.get('/getnickname', auth, async (req, res) => {

@@ -26,7 +26,7 @@ export const SignInPage = () => {
 	const regHandler = async () => {
 		try{
 			const data = await request('/api/auth/register', 'POST', {...form})
-			console.log('Data', data)
+			message(data.message)
 		} catch (e) {
 			
 		}
@@ -35,8 +35,8 @@ export const SignInPage = () => {
 	return(
 		<div className="register-main">
 		
-			<div className="logo-inner">
-
+			<div style={{marginTop: "100px"}} className="logo-inner">
+				<h1 style={{ fontFamily: "Bunya", color: "#fff"}}>DQ</h1>
 			</div>
 			<div className="card">
 				<div className="card-content">

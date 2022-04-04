@@ -4,6 +4,8 @@ import {useHttp} from '../hooks/http.hook'
 import {LoginContext} from '../context/LoginContext'
 import {useNavigate} from 'react-router-dom'
 import updated from '../images/updated.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFolderPlus } from '@fortawesome/free-solid-svg-icons'
 
 export const UpdateTable = ({ table }) => { 
 	var ColumnsWidth = 0  
@@ -92,7 +94,7 @@ export const UpdateTable = ({ table }) => {
 		try{
 			for(var i = 0;i < num;i++){
 				header_width++
-				$header = $header.concat(`<th class="header-element-${header_width}" "><textarea placeholder="Type..." class="materialize-textarea">${table.thead[i]}</textarea></th>`)
+				$header = $header.concat(`<th class="header-element-${header_width}" "><textarea placeholder="Type..." class="materialize-textarea th-textarea">${table.thead[i]}</textarea></th>`)
 			}
 			for(var i = 0;i < table.tbody.length;i++){
 				local_column_num++
@@ -176,7 +178,7 @@ export const UpdateTable = ({ table }) => {
 				}
 				$(this).attr('id', `table-element-${index }`)
 				global_element_arr.push($(this).val())
-			});
+			})
 		} catch(e) {
 			console.log(e)
 		} finally {
@@ -214,9 +216,9 @@ export const UpdateTable = ({ table }) => {
 								</table>
 							</div>	
 							<div className="round-btn-inner-width grid-column-2">
-								<div>
-									<button id="round-btn-width-plus" className="waves-effect waves-light round-btn" onClick={changeTableHeaders_pl}>→</button>
-									<button id="round-btn-width-minus" className="waves-effect waves-light round-btn" onClick={changeTableHeaders_min}>←</button>
+								<div style={{ marginLeft: "19px"}}>
+									<button id="round-btn-width-plus round-btn-right" className="waves-effect waves-light round-btn" onClick={changeTableHeaders_pl}>→</button>
+									<button id="round-btn-width-minus round-btn-right" className="waves-effect waves-light round-btn" onClick={changeTableHeaders_min}>←</button>
 								</div>
 							</div>
 						</div>

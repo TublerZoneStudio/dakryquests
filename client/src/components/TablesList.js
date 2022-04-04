@@ -47,6 +47,13 @@ export const TablesList = ({ tables }) => {
 			<section className="food-menu">
 				<ul>
 				{ tables.map((table) => {
+					
+					var sliced_desc = table.desc.slice(0,35);
+					
+					if (sliced_desc.length < table.desc.length) {
+						sliced_desc += '...';
+					}
+					
 					return (
 					<li key={table._id}>
 					  <div id={table._id} className="card waves-effect waves-brown waves-ripple">
@@ -79,7 +86,7 @@ export const TablesList = ({ tables }) => {
 							Описание таблицы:
 							<div className="table-desc">
 								<strong>
-								{table.desc}
+									{sliced_desc}
 								</strong>
 							</div>
 						</div>

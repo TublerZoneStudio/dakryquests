@@ -32,19 +32,28 @@ router.get('/', auth, async (req, res) => {
   }
 }) 
 
-router.post('/delete', auth ,async (req, res) => {
+router.get('/gettoken/:id', async (req, res) => {
   try {
-	const {token_id} = req.body
+	  
+    const token = await AuthToken.findOne({ _id: req.params.id })
 	
-	const token = await AuthToken.deleteOne({ _id: token_id  })
-	
-	return res.status(200).json({ message: "Successfully deleted!" })
-	
-  } catch (e) {
+    return res.json(token)
+  } catch (e) { 
     res.status(500).json({ message: e })
   }
-}) 
+})
 
+router.post('/updatetoken/:id', auth, async (req, res) => {
+  try {
+	const {type} = req.body
+	 
+    const token = await AuthToken.findByIdAndUpdate(req.params.id,{"token_type": type})
+	
+    return res.json(token)
+  } catch (e) { 
+    res.status(500).json({ message: e })
+  }
+})
 
 router.post('/check', async (req, res) => {
   try {

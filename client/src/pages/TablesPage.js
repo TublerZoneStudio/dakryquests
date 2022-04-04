@@ -16,6 +16,22 @@ export const TablesPage = () => {
 	const {token} = useContext(LoginContext)
 	
 	const auth = useContext(LoginContext) 
+	
+	const checkStatus = useCallback( async () => {
+		try{
+			const fetched = await request('/api/auth/getnickname', 'GET', null, {
+				Authorization: `Bearer ${auth.token}`
+			})
+			
+			if(fetched.user_status !== "admin"){
+				return navigate('/undefined-page')
+			}
+			
+			return fetchTables()
+		} catch(e) {
+			console.log(e)
+		}
+	}, [auth, request])
 		
 	const fetchTables = useCallback( async () => {
 		try{
@@ -31,8 +47,8 @@ export const TablesPage = () => {
 	}, [token, request])
 	
 	useEffect( () => {
-		fetchTables()
-	}, [fetchTables])
+		checkStatus()
+	}, [checkStatus])
 	
 	if(loading) {
 		return <Loader />

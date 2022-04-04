@@ -1,10 +1,14 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, {useContext, useState, useEffect, useCallback} from 'react'
 import $ from 'jquery'
+import {Loader} from '../components/Loader'
 import {useHttp} from '../hooks/http.hook'
 import {LoginContext} from '../context/LoginContext'
 import {useNavigate} from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFolderPlus } from '@fortawesome/free-solid-svg-icons'
 
 export const CreatePage = () => { 
+	
 	var ColumnsWidth = 0  
 	var ColumnsHeight = 0 
 	var header_width = 0
@@ -26,11 +30,38 @@ export const CreatePage = () => {
 		$('.result').hide()
 	});
 	
+	const checkStatus = useCallback( async () => {
+		try{
+			const fetched = await request('/api/auth/getnickname', 'GET', null, {
+				Authorization: `Bearer ${auth.token}`
+			})
+			
+			if(fetched.user_status !== "admin"){
+				return navigate('/undefined-page')
+			}
+		} catch(e) {
+			console.log(e)
+		}
+	}, [auth, request])
+	
+	useEffect(() => {
+		checkStatus()
+	}, [checkStatus])
+
 	const pressHandler = async (header_arr, column_arr) => {
 		var table_title = $('#tname').val()
 		var table_desc = $('#tdesc').val()
+		var is__public = $('#is-public').is(":checked")
 		try {
-			const data = await request('/api/table/generate', 'POST', {thead: header_arr, tbody: column_arr, ttitle: table_title, tdesc: table_desc}, { 
+			const data = await request('/api/table/generate', 'POST',
+				{
+					thead: header_arr,
+					is_public: is__public,
+					tbody: column_arr,
+					ttitle: table_title,
+					tdesc: table_desc
+				}, 
+				{ 
 			  Authorization: `Bearer ${auth.token}`
 			})
 			
@@ -113,7 +144,7 @@ export const CreatePage = () => {
 			$('.result').show()
 			$("#table-header").append("<tr id='header-tr'>" + $block + "</tr>")
 			$("#headers-creator").hide()
-			$('.titles-num-inner').hide()
+			$('.create-block').hide()
 			$('.round-btn').show()
 			$('#compile-btn').show()
 			ColumnsWidth = num
@@ -217,20 +248,31 @@ export const CreatePage = () => {
 	
 	return(
 		<div>
-			<div className="result-bar pre main container">
-				<div className="input-field titles-num-inner col s12">
-					<input id="tname" type="text" className="validate"/>
-					<label htmlFor="text">Введите название таблицы</label>
+			<div className=" result-bar pre register-main container">
+				<div className="create-block">
+					<div style={{ textAlign: "center"}}>
+						<FontAwesomeIcon style={{ color: "var(--component-bg)" }} icon={ faFolderPlus } size="2x"/>
+					</div>
+					<div className="input-field titles-num-inner col s12">
+						<input id="tname" type="text" className="validate"/>
+						<label htmlFor="text">Введите название таблицы</label>
+					</div>
+					<div className="input-field titles-num-inner col s12">
+						<input id="tdesc" type="text" className="validate"/>
+						<label htmlFor="text">Введите описание таблицы</label>
+					</div>
+					<div className="input-field titles-num-inner col s12">
+						<input id="titles-num" type="number" className="validate" maxLength="2" max="100"/>
+						<label htmlFor="number">Введите кол-во верхних столбцов</label>
+					</div>
+					<div style={{ height: "51px"}}className="input-field titles-num-inner col s12">
+						<label>
+							<input id="is-public" type="checkbox" />
+							<span><a href="#" className="amber-lighten-1-color">Таблица публичная</a></span>
+						</label>
+					</div>
+					<button type="submit" id="headers-creator" className="component-bg waves-effect waves-light" onClick={addTableHeaders}>Создать таблицу</button>
 				</div>
-				<div className="input-field titles-num-inner col s12">
-					<input id="tdesc" type="text" className="validate"/>
-					<label htmlFor="text">Введите описание таблицы</label>
-				</div>
-				<div className="input-field titles-num-inner col s12">
-					<input id="titles-num" type="number" className="validate" maxLength="2" max="100"/>
-					<label htmlFor="number">Введите кол-во верхних столбцов</label>
-				</div>
-				<button type="submit" id="headers-creator" className="component-bg waves-effect waves-light" onClick={addTableHeaders}>Создать таблицу</button>
 				<div className="result-inner">
 					<div className="result-grid">
 						<div className="result grid-column-1">
@@ -244,9 +286,9 @@ export const CreatePage = () => {
 							</table>
 						</div>	
 						<div className="round-btn-inner-width grid-column-2">
-							<div>
-								<button id="round-btn-width-plus" className="waves-effect waves-light round-btn" onClick={changeTableHeaders_pl}>→</button>
-								<button id="round-btn-width-minus" className="waves-effect waves-light round-btn" onClick={changeTableHeaders_min}>←</button>
+							<div style={{ marginLeft: "19px"}}>
+								<button id="round-btn-width-plus round-btn-right" className="waves-effect waves-light round-btn" onClick={changeTableHeaders_pl}>→</button>
+								<button id="round-btn-width-minus round-btn-right" className="waves-effect waves-light round-btn" onClick={changeTableHeaders_min}>←</button>
 							</div>
 						</div>
 					</div>

@@ -39,7 +39,7 @@ export const LogInPage = () => {
 	return(
 		<div className="main">
 			<div className="logo-inner">
-				
+				<h1 style={{ fontFamily: "Bunya", color: "#fff"}}>DQ</h1>
 			</div>
 			<div className="card">
 				<div className="card-content">
