@@ -55,9 +55,13 @@ router.post(
 	
     await user.save()
 
-    await mailService.sendActivationMail(email, user);
-	
-    return res.json({ message: ` Активационное письмо было выслано на почтовый адрес ${email}` })
+    const token = jwt.sign(
+			{userId: user.id},
+			config.get('jwtSecret'),
+			{ expiresIn: '1h'}
+		)
+		
+		res.json({token, userId: user.id, status: user.user_status})	
 
   } catch (e) {
     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })

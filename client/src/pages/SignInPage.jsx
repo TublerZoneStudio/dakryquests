@@ -1,10 +1,13 @@
-import React, {useEffect,useState} from 'react'
+import React, {useEffect,useState, useContext} from 'react'
 import {useHttp} from '../hooks/http.hook'
 import {useMessage} from '../hooks/message.hook'
 import Loader from '../components/UI/Loader/Loader'
 import { Link } from 'react-router-dom'
+import { LoginContext } from '../context/LoginContext'
 
 export const SignInPage = () => {
+
+	const auth = useContext(LoginContext)
 	
 	const message = useMessage()
 	
@@ -26,7 +29,10 @@ export const SignInPage = () => {
 	const regHandler = async () => {
 		try{
 			const data = await request('/api/auth/register', 'POST', {...form})
-			message(data.message)
+			if(data.message) {
+				return message(data.message)
+			}
+			auth.login(data.token, data.userId, data.status)
 		} catch (e) {
 			console.log(e)
 		}

@@ -3,8 +3,12 @@ import cl from './Table.module.sass'
 import Loader from '../UI/Loader/Loader'
 import { useTable } from '../../context/TableProvider'
 import TableDetails from './TableDetails/TableDetails'
+import {useHttp} from '../../hooks/http.hook'
 
 const Table = ({view = false}) => {
+
+	const { loading } = useHttp()
+
 	const { tableMethods, table, tableData, textAlignment } = useTable()
 
 	const [data, setData] = useState()
@@ -13,7 +17,7 @@ const Table = ({view = false}) => {
 		setData(tableData)
 	}, [tableData])
 
-	if(!data || !table) {
+	if(!data || !table || loading) {
 		return <Loader/>
 	}
 

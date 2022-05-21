@@ -28,6 +28,7 @@ export const useRoutes = (isA, userStatus) => {
 					<Route path="/public-tables" element={<PublicTables/>}/>
 					<Route path="/user-control" element={<UserControl/>}/>
 					<Route path="/log-in" element={<Navigate to="/tables"/>}/>
+					<Route path="/sign-in" element={<Navigate to="/tables"/>}/>
 					<Route
 		        path="*"
 		        element={<UndefinedRoutePage/>}
@@ -42,6 +43,7 @@ export const useRoutes = (isA, userStatus) => {
 				<Route path="/public-tables" element={<PublicTables/>}/>
 				<Route path="/tables/:id" element={<TableView/>}/>
 				<Route path="/log-in" element={<Navigate to="/public-tables"/>}/>
+				<Route path="/sign-in" element={<Navigate to="/public-tables"/>}/>
 				<Route
 		        path="*"
 		        element={<UndefinedRoutePage/>}

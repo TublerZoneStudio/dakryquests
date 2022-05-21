@@ -1,10 +1,17 @@
 import {useState} from 'react'
 import cl from './BillboardPanel.module.sass'
+import Btn from '../../../components/UI/Btn/Btn'
 
 const BillboardPanel = ({createBillboardMessage}) => {
 
 	const [title, setTitle] = useState(null)
 	const [description, setDescription] = useState(null)
+
+	const CreateBillboardMessage = () => {
+		createBillboardMessage(title, description)
+		setTitle('')
+		setDescription('')
+	}
 
 	return (
 		<div className={cl.BillboardPanel}>
@@ -14,21 +21,21 @@ const BillboardPanel = ({createBillboardMessage}) => {
 				  <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 0 0 1 0v-1h1a.5.5 0 0 0 0-1h-1v-1a.5.5 0 0 0-.5-.5Z"/>
 				</svg>
 			</div>
-			<div className="input-field titles-num-inner col s12">
-				<input type="text" onChange={e => setTitle(e.target.value)}/>
-				<label htmlFor="text">Введите заголовок сообщения</label>
+			<div className={cl.InputInner}>
+				<div>
+					<input type="text" className="browser-default" value={title} onChange={e => setTitle(e.target.value)}/>
+				</div>
+				<div>
+					<input type="text" style={{marginBottom: "10px"}}className="browser-default" value={description} onChange={e => setDescription(e.target.value)} />
+				</div>
 			</div>
-			<div className="input-field titles-num-inner col s12">
-				<input type="text" onChange={e => setDescription(e.target.value)} />
-				<label htmlFor="text">Введите сообщение</label>
-			</div>
-			<button 
+			<Btn
 				style={{ background: "var(--component-bg)"}} 
 				className="btn waves-effect waves-light"
-				onClick={() => createBillboardMessage(title, description)}
+				onClick={() => CreateBillboardMessage()}
 			>
 				Создать сообщение
-			</button>
+			</Btn>
 		</div>
 	)
 }
