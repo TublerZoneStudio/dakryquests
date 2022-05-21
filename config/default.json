@@ -2,5 +2,10 @@
 	"port": 5000,
 	"mongoUri": "mongodb+srv://lebedev:asdf2041873@cluster0.nzj1l.mongodb.net/app?retryWrites=true&w=majority",
 	"jwtSecret": "asdf2041873",
-	"baseUrl": "http://localhost:5000"
+	"baseUrl": "http://localhost:5000",
+	"clientUrl": "http://localhost:3000",
+	"SMTP_HOST":"smtp.gmail.com",
+	"SMTP_PORT":587,
+	"SMTP_USER":"lebedevpavel0511@gmail.com",
+	"SMTP_PASSWORD":"asdf2041873"
 }

@@ -1,12 +1,16 @@
 const express = require('express')
 const config = require('config')
 const path = require('path')
+const cors = require('cors')
 const mongoose = require('mongoose')
 const app = express()
 
 app.use(express.static('public'));
 
 app.use(express.json({ extended: true }))
+app.use(cors({
+    credentials: true
+}))
  
 app.use('/api/auth', require('./routes/auth.routes'))
 app.use('/api/table', require('./routes/table.routes'))

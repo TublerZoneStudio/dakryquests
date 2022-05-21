@@ -1,0 +1,36 @@
+@import '../../../styles/variables.sass'
+
+.Inner 
+  display: flex 
+  justify-content: center 
+  align-items: center
+  height: 100vh
+  color: $color
+
+  .Content
+    display: grid
+
+    .Loader
+      display: inline-block
+      width: 80px
+      height: 80px
+
+      &:after 
+        content: " "
+        display: block
+        width: 64px
+        height: 64px
+        margin: 8px
+        border-radius: 50%
+        border: 4px solid #fff
+        border-color: $co $bg $bg $bg
+        animation: Loader 1.2s linear infinite
+    .Text 
+      text-align: center
+
+@keyframes Loader
+  0% 
+    transform: rotate(0deg)
+  
+  100% 
+    transform: rotate(360deg)

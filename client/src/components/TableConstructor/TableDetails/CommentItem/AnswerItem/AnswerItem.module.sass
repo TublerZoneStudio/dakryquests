@@ -1,0 +1,26 @@
+@import '../../../../../styles/variables.sass'
+
+.AnswerContainer
+	&:hover 
+		.Answer
+			.CloseInner
+				display: flex
+
+	.Answer 
+		background: $fg
+		padding: 5px 
+		margin: 5px 0px 5px 75px
+		word-break: break-all
+		border-radius: 5px
+
+		.Header 
+			width: 100% 
+			display: flex 
+			justify-content: space-between 
+			align-items: center
+
+		.CloseInner
+			display: none
+			width: 100% 
+			justify-content: center 
+			align-items: center

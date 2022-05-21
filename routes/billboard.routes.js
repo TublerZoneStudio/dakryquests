@@ -8,15 +8,17 @@ const moment = require('moment')
 
 router.post('/generate', auth, async (req, res) => {
   try {
-    const {title, desc, owner_nickname} = req.body
-
-	const calendar = moment().subtract(10, 'days').calendar()
-	const PM = moment().format('LT');
+    const {title, description, ownerId} = req.body
+		const calendar = moment().subtract(10, 'days').calendar()
+		const PM = moment().format('LT')
 	
-	const create_date = `${calendar}. ${PM}`
+		const date = `${calendar}. ${PM}`
  
     const message = new BillboardMessage({
-		title, desc, owner_nickname, owner: req.user.userId, create_date
+			title,
+			description, 
+			ownerId, 
+			date
     }) 
  
     await message.save()
@@ -27,7 +29,26 @@ router.post('/generate', auth, async (req, res) => {
   }
 })
 
-router.get('/fetch-messages',auth, async (req, res) => {
+router.post('/delete', auth, async (req, res) => {
+	try {
+		const {messageId} = req.body 
+
+		const isOwn = await BillboardMessage.findById(messageId) 
+
+		if(isOwn.ownerId == req.user.userId) {
+			await BillboardMessage.deleteOne({ _id: messageId})
+
+			return res.json('Сообщение успешно удалено')
+		}
+
+		res.json('Ошибка при удалении')
+
+	} catch(e) {
+		res.status(500).json({message: e})
+	}
+})
+
+router.get('/messages', auth, async (req, res) => {
 	try { 
 		const messages = await BillboardMessage.find({ status: true })
 		

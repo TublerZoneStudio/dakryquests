@@ -1,0 +1,21 @@
+@import '../../styles/variables.sass'
+
+.NicknameInner
+	display: flex
+	justify-content: center 
+	align-items: center
+	
+	.Svg 
+		margin-left: 10px
+		width: 25px
+		height: 25px
+		position: relative 
+		bottom: 2px
+		transition: 1s all ease
+		fill: $color
+
+		&.Admin 
+			fill: yellow
+
+			&:hover
+				transform: rotate(360deg)

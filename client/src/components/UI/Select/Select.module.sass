@@ -1,0 +1,60 @@
+@import '../../../styles/variables.sass'
+
+.Select 
+	background: $bg
+	padding: 14px 
+	border-radius: 5px
+	width: 100% 
+	color: $color 
+	border: none
+	cursor: pointer
+	margin-bottom: 2.5px
+
+	&.TokenType
+		padding: 2px
+		width: 200px
+		border: 1px solid $co
+
+	svg 
+		width: 22px 
+		height: 22px 
+		fill: $color
+
+		&.Active 
+			transform: rotateX(180deg)
+
+	&:focus 
+		background: $bg
+
+	.SelectHeader
+		display: flex 
+		justify-content: space-between 
+		align-items: center
+
+.SelectBody	
+	display: none
+	transition: $transition 
+
+	&.Active 
+		display: grid 
+
+	.Option 
+		background: $bg 
+		padding: 14px
+		margin: 2.5px 0px
+		border-radius: 5px
+		color: $color 
+		border: none
+		width: 100%
+		cursor: pointer 
+		transition: $transition
+
+		&.TokenType 
+			width: 200px
+			border: 1px solid $co
+			padding: 4px
+
+			&:hover 
+				background: $fg
+		
+

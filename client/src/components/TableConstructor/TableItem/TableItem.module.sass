@@ -1,0 +1,48 @@
+@import '../../../styles/variables.sass'
+
+.TableItem 
+	font-family: $font
+	background: $bg
+	margin: 10px
+	color: $color
+	word-break: break-all
+	border-radius: 5px
+	max-width: 500px
+
+	.TableItem__header
+		display: flex 
+		justify-content: space-between
+		align-items: center
+		padding: 5px 5px
+		border-bottom: 1px solid $fg
+
+		.TableItem__title
+			text-overflow: ellipsis
+			overflow: hidden
+			width: 160px
+			height: 1.2em
+			white-space: nowrap
+
+		.TableItem__btns
+			display: flex 
+			justify-content: space-evenly 
+			flex-wrap: wrap
+
+	.TableItem__body
+		display: grid
+		align-content: space-between
+		height: calc(100% - 36px)
+
+	.TableItem__details
+		padding: 5px
+		display: grid 
+		grid-gap: 8px
+		border-left: 1px solid $bg
+		border-right: 1px solid $bg
+
+	.TableItem__footer
+		display: flex 
+		justify-content: space-between
+		align-items: center
+		padding: 5px 5px 
+		border-top: 1px solid $fg

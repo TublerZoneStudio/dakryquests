@@ -1,3 +1,0 @@
-git add . уже сделал
-
-git commit -m "initial" не дождался

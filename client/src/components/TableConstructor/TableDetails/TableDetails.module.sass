@@ -1,0 +1,54 @@
+@import '../../../styles/variables.sass'
+
+.TableDetails 
+	background: $bg
+	display: grid 
+	grid-gap: 10px
+	color: $color
+	padding: 5px 10px
+
+	.Header 
+		display: flex 
+		justify-content: space-between 
+		align-items: center 
+		padding: 5px 10px
+		background: $fg
+		border-radius: 8px
+
+	.Body 
+		display: grid 
+		grid-gap: 10px
+		padding: 10px 
+		border-radius: 8px
+		background: $fg
+		word-break: break-all
+
+
+	.OpenBtnInner 
+		display: flex
+		justify-content: center 
+		align-items: center
+
+	.CommentsInner 
+		display: none 
+
+		&.Active 
+			display: block
+
+		.CommentForm 
+			display: flex
+			justify-content: space-between
+			align-items: center
+			background: $fg
+			padding: 5px 15px
+			border-radius: 8px
+
+			input 
+				background: transparent 
+				width: 100%
+				border-bottom: 1px solid $co
+				color: $color 
+				padding: 5px 5px
+				margin: 0!important
+				height: auto
+

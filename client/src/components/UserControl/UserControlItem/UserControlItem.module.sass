@@ -1,0 +1,163 @@
+@import '../../../styles/variables.sass'
+
+.UserControlItem
+	background: $bg
+	border-radius: 10px
+	display: flex 
+	justify-content: flex-start
+	margin: 5px 0px
+	transition: 0.2s all ease
+
+	.Icon
+		background: $co
+		min-width: 80px
+		min-height: 80px
+		display: flex 
+		justify-content: center
+		align-items: center
+		border-top-left-radius: 8px
+		border-bottom-left-radius: 8px
+		transition: 0.2s all ease
+
+		svg
+			fill: $bg
+			width: 30px
+			height: 30px
+
+	.Content 
+		display: flex 
+		justify-content: space-around 
+		align-items: center
+		color: $color
+		padding: 10px
+		width: 100%
+
+		.CaretBtn
+			background: transparent
+			border: none
+			cursor: pointer
+			transition: 0.2s all ease
+
+			&.active
+				transform: rotateX(180deg)
+
+			svg
+				fill: $co
+				width: 25px
+				height: 25px
+
+.ContentDetails
+	transition: 0.2s all ease
+	background: $bg
+	border-radius: 10px
+	color: $color
+	display: none
+
+	&.active 
+		display: grid 
+		align-items: center
+		align-content: center
+		padding: 10px
+		margin: 10px 0px
+
+	.TokensInner 
+		width: 100% 
+		margin: 2.5px 0px
+		display: flex 
+		justify-content: space-around 
+
+		.TokenControlItem
+			background: $fg
+			border: 1px solid $co
+			width: 44px
+			display: flex 
+			align-items: center
+			justify-content: center
+			color: $color 
+			cursor: pointer
+			transition: 0.1s all ease
+
+			&:hover 
+				transform: scale(1.05)
+
+		.TokensInput
+			background: $fg
+			width: 100%
+			border-top: 1px solid $co 
+			border-bottom: 1px solid $co
+			padding: 0px 10px
+			margin: 0
+			height: 44px
+			color: $color 
+			display: flex 
+			justify-content: center 
+			align-items: center
+
+	.NicknameInput 
+		background: $fg 
+		border-radius: 8px
+		color: $color
+		border: 1px solid $co 
+		padding: 0px 10px
+		box-sizing: border-box
+		margin: 2.5px 0px
+
+	.StatusInner
+
+		.SelectHeader
+			display: flex 
+			justify-content: space-between
+			align-items: center
+			background: $fg
+			border: 1px solid $co
+			border-radius: 8px
+			color: $color
+			padding: 10px 
+			width: 100%
+			margin: 2.5px 0px
+			cursor: pointer
+
+			.Caret 
+
+				svg 
+					display: flex 
+					justify-content: center 
+					align-content: center
+					height: 20px 
+					width: 20px 
+					fill: $color 
+
+				&.active 
+					transform: rotateX(180deg) 
+
+		.SelectBody 
+			display: none
+
+			&.active 
+				display: grid
+
+			.StatusBtn 
+				background: $fg
+				border: 1px solid $co
+				padding: 10px 10px 
+				color: $color 
+				border-radius: 8px
+				margin: 1px 0px
+				cursor: pointer
+				transition: 0.1s all ease
+
+				&:hover 
+					padding: 15px 10px
+
+	.SaveInner 
+		
+		.SaveBtn 
+			width: 100% 
+			padding: 10px
+			border: 1px solid $co 
+			color: $color
+			cursor: pointer
+			border-radius: 8px 
+			background: $fg
+			margin: 2.5px 0px
+

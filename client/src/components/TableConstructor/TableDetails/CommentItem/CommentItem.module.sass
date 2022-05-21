@@ -1,0 +1,65 @@
+@import '../../../../styles/variables.sass'
+
+.CommentContainer 
+
+	.Comment 
+		margin: 5px 0px
+		background: $fg
+		display: grid 
+		grid-gap: 5px
+		padding: 8px 
+		border-radius: 8px
+		width: 100%
+		word-break: break-all
+
+		&:hover 	
+			.Footer 
+				visibility: visible 
+				opacity: 1
+				height: auto
+
+		.Header 
+			display: flex 
+			justify-content: space-between 
+
+		.Footer 
+			display: flex 
+			justify-content: space-between
+			align-items: center 
+			width: 100%
+			visibility: hidden 
+			height: 0px
+			opacity: 0
+			transition: 0.5s height ease
+			transition: 0s button ease 
+			transition: 0s input ease
+
+			&.Active 
+				display: flex 
+				justify-content: space-between
+				align-items: center
+				width: 100%
+
+			.ReplyForm
+				display: flex 
+				align-items: center
+				.ReplyInput 
+					background: transparent 
+					border: 1px solid $co
+					border-radius: 5px
+					box-sizing: border-box 
+					padding: 5px 10px
+					margin: 0!important
+					width: auto 
+					height: auto
+					color: $color
+
+				.ReplyBtn 
+					background: transparent 
+					border: none 
+					color: $color 
+					border: 1px solid $co 
+					border-radius: 5px
+					cursor: pointer 
+					padding: 6px 10px
+					margin-left: 5px

@@ -1,0 +1,28 @@
+@import '../../../styles/variables.sass'
+
+.RoundBtn 
+	background: transparent 
+	border-radius: 50%
+	color: red
+	width: 45px 
+	height: 45px
+	margin: 3px 5px
+	border: none 
+	transition: $transition
+	display: flex 
+	justify-content: center 
+	align-items: center
+
+	&:focus 
+		background: transparent 
+
+	&:hover 
+		background: rgba(0, 0, 0, 0.1)
+
+		svg 
+			fill: $co
+
+	svg 
+		fill: $color 
+		width: 25px
+		height: 25px

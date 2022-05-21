@@ -1,0 +1,66 @@
+@import '../../styles/variables.sass'
+
+.table__container
+	height: 100vh
+	width: 100%
+	display: flex 
+	align-items: center 
+	justify-content: center
+	overflow: auto
+
+	&::-webkit-scrollbar
+		width: 3px
+
+	&::-webkit-scrollbar-track 
+		background: $bg
+
+	&::-webkit-scrollbar-thumb 
+		background: $co 
+		border-radius: 10px
+
+	.table_column
+		display: grid
+
+		span 
+			&:nth-child(2n)
+				background: rgba(0,0,0,0.1)
+
+
+		.table_column__textarea 
+			resize: both
+			border-bottom: 1px solid transparent
+			color: $color
+			outline: none
+			min-width: 40px 
+			width: 100%
+			transition: 0.5s all ease
+			margin: 0!important
+
+			&:focus
+				border-bottom: 1px solid $co
+
+.table__details
+	color: $color
+	background: $bg
+	border-top: 1px solid $color
+	padding: 10px 
+	display: grid 
+	gap: 10px
+
+	.table__title
+
+		strong
+			background: $fg
+			padding: 5px 
+			border-radius: 8px
+			color: $color
+
+	.table__description
+
+		strong 
+			background: $fg
+			padding: 5px 
+			border-radius: 8px
+			color: $color
+
+	

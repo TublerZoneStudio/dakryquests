@@ -32,6 +32,10 @@ body::-webkit-scrollbar-thumb {
 	background: var(--component-bg);
 }
 
+.App {
+	margin-top: 64px;
+}
+
 .loaded-logo{
 	opacity: 0;
 }
@@ -143,12 +147,17 @@ body::-webkit-scrollbar-thumb {
 
 nav {
 	padding: 25px;
-  position: relative;
+	z-index: 999999999;
+  position: fixed;
+  top:  0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--component-bg);
+  background-color: rgba(44, 47, 51, 0.8);
+  backdrop-filter: saturate(170%) blur(15px);
+  box-shadow: none;
 }
+
 .nav-svg{
 	cursor: pointer;
 	transition: 0.2s all ease-in-out;
@@ -165,9 +174,21 @@ nav ul {
 	flex-direction: column;
 	left: -100%;
 	top: 0;
-	background-color: var(--component-bg);
-	width: 50%;
+	background-color: rgba(44, 47, 51, 1);
+  backdrop-filter: saturate(170%) blur(15px);
+	width: 70%;
 	height: 100vh;
+}
+
+nav ul li a svg{
+	position:  relative;
+	top:  13px;
+	width: 35px;
+	height: 35px;
+	fill: #fff;
+}
+nav ul li a span{
+	margin-left: 10px;
 }
 .opac{
 	z-index: 9998;
@@ -411,6 +432,8 @@ p {
 	fill: var(--component-bg);
 	transition: 0.2s all;
 	cursor: pointer;
+	position: relative;
+	top:  2.5px;
 }
 .li-copy-btn{
 	background: transparent;
@@ -1010,7 +1033,6 @@ nav .nav-wrapper {
 	color: red!important;
     border-bottom: 1px solid red!important;
 }
-
 
 .placeholder {
   position: absolute!important;

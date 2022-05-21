@@ -1,0 +1,51 @@
+@import '../../../styles/variables.sass'
+
+.BillboardMessage
+	background: $bg
+	border-radius: 10px
+	display: flex 
+	justify-content: flex-start
+	margin: 5px 0px
+	transition: 0.2s all ease
+
+	&:hover 
+
+		.Icon
+			min-width: 90px
+
+	.Icon
+		background: $co
+		min-width: 80px
+		min-height: 80px
+		display: flex 
+		justify-content: center
+		align-items: center
+		border-top-left-radius: 8px
+		border-bottom-left-radius: 8px
+		transition: 0.2s all ease
+
+		.Svg
+			fill: $bg
+			width: 30px
+			height: 30px
+	.Content 
+		padding: 10px 30px
+		color: $color
+		word-break: break-all
+		display: grid 
+		align-content: space-around
+		width: 100%
+
+		.Header
+			display: flex 
+			justify-content: space-between
+
+			.CloseSvg_inner
+				display: flex 
+				justify-content: center 
+				align-items: center
+
+				.CloseSvg
+					fill: $color
+					width: 16px
+					height: 16px

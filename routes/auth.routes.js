@@ -7,6 +7,7 @@ const User = require('../models/User')
 const router = Router()
 const AuthToken = require('../models/AuthToken')
 const auth = require('../middleware/auth.middleware')
+const mailService = require('../services/mail-service');
 
 router.post(
   '/register',
@@ -15,7 +16,8 @@ router.post(
     check('password', 'Минимальная длина пароля 6 символов')
       .isLength({ min: 6 })
   ],
-  async (req, res) => {
+  async (req, res) => { 
+
   try {
     const errors = validationResult(req)
 
@@ -28,36 +30,39 @@ router.post(
 
     const {email, nickname, password, auth_token} = req.body
 	
-	const isToken = await AuthToken.findOne({ token: auth_token })
-	
-	if(!isToken){
-		return res.status(500).json({ message: "Токен не найден!" })
-	}
-	
-	if(!isToken.status){
-		return res.status(400).json({ message: "Токен не найден!" })
-	} 
-	
-	const token_id = isToken._id
-	
-	await AuthToken.findByIdAndUpdate(token_id,{status: false})
+		const isToken = await AuthToken.findOne({ token: auth_token })
+		
+		if(!isToken){
+			return res.status(500).json({ message: "Токен не найден!" })
+		}
+		
+		if(!isToken.status){
+			return res.status(400).json({ message: "Токен не найден!" })
+		} 
+		
+		const token_id = isToken._id
+		
+		await AuthToken.findByIdAndUpdate(token_id,{status: false})
 
     const candidate = await User.findOne({ email })
 
     if (candidate) {
-      return res.status(400).json({ message: 'Такой пользователь уже существует!' })
+      return res.status(400).json({ message: 'Пользователь с такими данными уже зарегистрирован в системе!' })
     }
  
     const hashedPassword = await bcrypt.hash(password, 12)
     const user = new User({ email, nickname, password: hashedPassword, user_status: isToken.token_type })
 	
     await user.save()
+
+    await mailService.sendActivationMail(email, user);
 	
-    return res.json({ message: 'Пользователь создан!' })
+    return res.json({ message: ` Активационное письмо было выслано на почтовый адрес ${email}` })
 
   } catch (e) {
     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
   }
+
 })
 
 router.post(
@@ -97,7 +102,7 @@ router.post(
 			{ expiresIn: '1h'}
 		)
 		
-		res.json({token, userId: user.id, admin_status: user.admin_status})		
+		res.json({token, userId: user.id, status: user.user_status})		
 		
 
 	} catch (e) {
@@ -105,13 +110,15 @@ router.post(
 	}
 })
 
-router.post('/update-user-tokens', auth, async (req, res) => {
+router.post('/update-user', auth, async (req, res) => {
   try {
-	const {user_id, tokens_num} = req.body 
+	const {userId, tokens, nickname, status} = req.body 
+
+	const user_status = status
 	 
-	await User.findByIdAndUpdate(user_id, {tokens: tokens_num })
+	await User.findByIdAndUpdate(userId, {tokens, nickname, user_status})
 	
-	return res.status(301).json(tokens_num)
+	return res.json("Данные полбзователя успешно обновлены") 
 	
   } catch (e) {
     res.status(500).json({ message: e })
@@ -120,20 +127,43 @@ router.post('/update-user-tokens', auth, async (req, res) => {
 
 router.get('/get-participants', auth, async (req, res) => {
   try {
-    const users = await User.find({ user_status: "participant" })
-    res.json(users)
+  	const users = []
+
+    const participants = await User.find({ user_status: "participant"})
+
+    participants.forEach(participant => {
+    	users.push(participant)
+    })
+
+		const employees = await User.find({ user_status: "employee"})
+
+		employees.forEach(employee => {
+    	users.push(employee)
+    })
+
+    res.json(users)	
   } catch (e) {
     res.status(500).json({ message: e })
   }
 })
 
-router.get('/getnickname', auth, async (req, res) => {
+router.get('/get-user-by-params', auth, async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.user.userId })
     res.json(user)
   } catch (e) {
     res.status(500).json({ message: e })
   }
+})
+
+router.post('/get-user-by-id', async (req, res) => {
+	try {
+		const {id} = req.body
+		const user = await User.findById(id)
+		res.json(user)
+	} catch(e) {
+		console.log(e)
+	}
 })
 
 
