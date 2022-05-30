@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import cl from './BillboardPanel.module.sass'
 import Btn from '../../../components/UI/Btn/Btn'
+import GoogleInput from '../../../components/UI/Input/GoogleInput/GoogleInput'
 
 const BillboardPanel = ({createBillboardMessage}) => {
 
@@ -23,19 +24,17 @@ const BillboardPanel = ({createBillboardMessage}) => {
 			</div>
 			<div className={cl.InputInner}>
 				<div>
-					<input type="text" className="browser-default" value={title} onChange={e => setTitle(e.target.value)}/>
+					<GoogleInput type="text" onChange={e => setTitle(e.target.value)} label="Введите заголовок объявления" defVal={title}/>
 				</div>
 				<div>
-					<input type="text" style={{marginBottom: "10px"}}className="browser-default" value={description} onChange={e => setDescription(e.target.value)} />
+					<GoogleInput type="text" onChange={e => setDescription(e.target.value)} label="Введите описание объявления" defVal={description}/>
 				</div>
+				<Btn 
+					onClick={() => CreateBillboardMessage()}
+				>
+					Создать сообщение
+				</Btn>
 			</div>
-			<Btn
-				style={{ background: "var(--component-bg)"}} 
-				className="btn waves-effect waves-light"
-				onClick={() => CreateBillboardMessage()}
-			>
-				Создать сообщение
-			</Btn>
 		</div>
 	)
 }

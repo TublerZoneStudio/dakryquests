@@ -2,7 +2,9 @@ import cl from './ColorPicker.module.sass'
 
 const ColorPicker = ({...props}) => {
 	return (
-		<input type="color" className={cl.ColorPicker} {...props}/>
+		<div className={cl.Wrapper}>
+			<input type="color" className={cl.ColorPicker} {...props}/>
+		</div>
 	)
 }
 

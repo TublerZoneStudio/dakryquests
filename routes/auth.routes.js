@@ -7,7 +7,6 @@ const User = require('../models/User')
 const router = Router()
 const AuthToken = require('../models/AuthToken')
 const auth = require('../middleware/auth.middleware')
-const mailService = require('../services/mail-service');
 
 router.post(
   '/register',
@@ -99,7 +98,7 @@ router.post(
 		if(!isMatch){
 			return res.status(400).json({ message: "Введены некорректные данные" })
 		}
-		
+		 
 		const token = jwt.sign(
 			{userId: user.id},
 			config.get('jwtSecret'),
@@ -110,7 +109,7 @@ router.post(
 		
 
 	} catch (e) {
-		res.status(500).json({ message: "Что-то пошло не так. Попробуйте снова" })
+		res.status(500).json({ message: "Что-то пошло не так. Попробуйте снова" }) 
 	}
 })
 

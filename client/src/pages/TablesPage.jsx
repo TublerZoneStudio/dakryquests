@@ -1,35 +1,48 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react'
+import React, { useState, useEffect, useContext, useCallback, useRef } from 'react'
 import {useHttp} from '../hooks/http.hook'
 import {LoginContext} from '../context/LoginContext'
 import Loader from '../components/UI/Loader/Loader'
 import TableList from '../components/TableConstructor/TableList/TableList'
 import PageTitle from '../components/UI/PageTitle/PageTitle'
+import { useTable } from '../context/TableProvider'
+import { useObserver } from '../hooks/observer.hook'
+import SmallLoader from '../components/UI/Loader/SmallLoader/SmallLoader'
 import no_results from '../images/no-results.png'
+
 export const TablesPage = () => {
+
+	const { tableMethods } = useTable()
+
 	const [tables, setTables] = useState([])
-	
-	const {loading, request} = useHttp()
-	
-	const {token} = useContext(LoginContext)
-	
-	const fetchTables = useCallback( async () => {
-		try{
-			const fetched = await request('/api/table', 'GET', null, {
-				Authorization: `Bearer ${token}`
-			})
-			setTables(fetched)
+	const [limit, setLimit] = useState(5)
+	const [page, setPage] = useState(0)
+	const [canLoad, setCanLoad] = useState(true)
+	const [loading, setLoading] = useState(false)
+	const obsElement = useRef()
+
+	const fetchTables = async(limit, page) => {
+		setLoading(true)
+		try {
+			const response = await tableMethods.getTables(limit, page)
+			if(!response.length) {
+				return setCanLoad(false)
+			} else {
+				setTables([...tables, ...response])
+			}
 		} catch(e) {
 			console.log(e)
+		} finally {
+			setLoading(false)
 		}
-	}, [token, request])
+	}
+
+	useObserver(obsElement, canLoad, loading, () => {
+		setPage(page + 1)
+	})
 
 	useEffect(() => {
-		fetchTables()
-	}, [fetchTables])
-	
-	if(loading) {
-		return <Loader />
-	}
+		fetchTables(limit, page)
+	}, [page])
 	
 	return (
 		<>
@@ -64,6 +77,11 @@ export const TablesPage = () => {
 						</div>
 					</div>	
 			}
+			<div style={{display: "flex", justifyContent: "center"}} ref={obsElement}>
+				{
+					canLoad && <SmallLoader/>
+				}
+			</div>
 		</>
 	)
 }

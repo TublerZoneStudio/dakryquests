@@ -1,0 +1,232 @@
+@import './variables.sass'
+@import "~materialize-css/dist/css/materialize.min.css"
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500")
+
+
+@font-face 
+	font-family: "Bunya"
+	src: URL('./fonts/Bunya-Regular.ttf') format('truetype')
+
+.react-tel-input .special-label
+	display: none!important
+
+.react-tel-input .form-control
+	background: transparent
+	border-top: 1px solid $fg!important
+	border-bottom: 1px solid $fg!important
+	border-radius: 0
+	outline: none
+	height: auto
+	width: 100%
+	font-size: 16px
+	margin: 0 0 0 0!important
+	padding: 0
+	box-shadow: none
+	box-sizing: content-box
+	transition: 0.2s all ease
+
+.react-tel-input .flag-dropdown
+	background: $bg
+	border: 1px solid $fg
+
+.react-tel-input .country-list
+	background: $fg!important
+	color: $color
+
+.react-tel-input .country-list .country.highlight
+	background: $bg!important
+
+.react-tel-input .country-list .country
+
+	&:hover 
+		background: $bg!important
+
+body
+	font-family: "Montserrat", sans-serif
+	background: $bg
+	color: $color
+
+body::-webkit-scrollbar 
+	width: 3px
+	border-radius: 5px
+
+body::-webkit-scrollbar-track 
+	background: $fg
+
+body::-webkit-scrollbar-thumb 
+	background: $co
+	border-radius: 7px
+
+a 
+	color: $co
+
+	.nav
+
+.showNav 
+	left: 0
+
+.opac-active
+	display: block!important
+
+.nickname-h
+	margin: 0px!important
+
+.nav-offcanvas-li
+	padding: 10px
+	display: flex
+	align-items: center
+	justify-content: space-between
+
+nav 
+	padding: 25px
+	z-index: 999999999
+	position: fixed
+	top:0
+	display: flex
+	align-items: center
+	justify-content: space-between
+	background-color: $fg
+	backdrop-filter: saturate(170%) blur(15px)
+	box-shadow: none
+
+.nav-svg
+	cursor: pointer
+	transition: 0.2s all ease-in-out
+
+.nav-svg:hover
+	transform: scale(1.1)
+
+nav ul 
+	z-index: 9999
+	transition: 0.2s ease-in-out
+	position: fixed
+	display: flex
+	flex-direction: column
+	left: -100%
+	top: 0
+	background: $fg
+	width: 60%
+	height: 100vh
+
+
+nav ul li a svg
+	position:relative
+	top:13px
+	width: 35px
+	height: 35px
+	fill: #fff
+
+nav ul li a span
+	margin-left: 10px
+
+.opac
+	z-index: 9998
+	transition:0.6s all
+	position: fixed
+	left: 0
+	top: 0
+	display: none
+	background-color: #000
+	opacity: 0.3
+	width: 100%
+	height: 100vh
+
+.open-btn
+	cursor: pointer
+
+
+
+.userblock
+	display: flex
+	align-content: center
+	align-items: center
+	justify-content: flex-start
+	padding: 30px
+
+
+.token-inner
+	width: 100px
+	
+.dot-inner
+	position: relative
+
+.dot 
+	position: absolute
+	top: 50%
+	transform: translate(0, -50%)
+	width: 10px
+	height: 10px
+	background: #f9f9f9
+	border-radius: 50%
+
+.dot.red 
+	background: #FF6057
+	border: 1px solid #E14640
+
+.dot.amber 
+	background: #FFBD2E
+	border: 1px solid #DFA123
+
+.dot.green 
+	background: #27C93F
+	border: 1px solid #1DAD2B
+
+.toast .toast-action
+	margin-left: 5px!important
+	margin-right: 5px
+	color: #fff!important
+
+.toast
+	background: $fg 
+	border: 1px solid $co 
+	border-radius: 4px
+	box-shadow: none
+
+.tokens-list
+	height: 300px
+	background: $fg
+	overflow-y:	scroll
+
+.tokens-list::-webkit-scrollbar 
+	width: 3px
+
+.tokens-list::-webkit-scrollbar-track 
+	background: $fg
+
+.tokens-list::-webkit-scrollbar-thumb 
+	background: $co 
+
+.collection.with-header .collection-item 
+	display: flex
+	justify-content: space-between
+	padding-left: 30px
+	padding-right: 30px
+
+.collection.with-header .collection-header 
+	background-color: $fg
+	border-bottom: 1px solid $bg
+	padding: 10px 20px
+
+.collection
+	color: $color
+	border: 1px solid $bg
+	border-radius: 9px
+	overflow: hidden
+	position: relative
+
+.collection .collection-item 
+	background-color: $fg
+	line-height: 1.5rem
+	padding: 10px 20px
+	margin: 0
+	border-bottom: 1px solid $bg
+	transition: 0.1s all ease-in-out
+
+.collection-item:hover
+	padding: 20px 20px
+
+svg 
+	position: relative 
+
+
+

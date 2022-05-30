@@ -1,0 +1,29 @@
+@import '../../../../styles/variables.sass'
+
+.loader__inner
+  display: grid
+  justify-content: center
+  width: 100%
+
+  .loader 
+    display: flex
+    justify-content: center
+    &:after 
+      content: " "
+      display: block
+      width: 25px
+      height: 25px
+      margin: 8px
+      border-radius: 50%
+      border: 2px solid $co
+      border-color: $co $fg $fg $fg
+      animation: loader 0.8s linear infinite
+
+@keyframes loader
+  0% 
+    transform: rotate(0deg)
+  
+  100% 
+    transform: rotate(360deg)
+  
+

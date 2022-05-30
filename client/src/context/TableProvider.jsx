@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useHttp } from '../hooks/http.hook'
 import TableService from '../services/TableService'
 import { LoginContext } from './LoginContext'
+import axios from 'axios'
 
 const TableContext = createContext()
 
@@ -15,7 +16,7 @@ export const TableProvider = ({ children }) => {
 	// Func dependencies
 	const navigate = useNavigate()
 	const auth = useContext(LoginContext)
-	const { request } = useHttp()
+	const { request, setLoading } = useHttp()
 	const tableService = new TableService()
 
 	// States
@@ -222,6 +223,44 @@ export const TableProvider = ({ children }) => {
 		})
 	}
 
+	const getTables = async(limit, page) => {
+		try {
+			const response = await axios.get('/api/table/tables', {
+				params : {
+					limit,
+					page 
+				}, 
+				headers : { 
+					'Authorization' : `Bearer ${auth.token}`
+				},
+				withCredentials: true
+			})
+
+			return response.data
+		} catch(e) {
+			console.log(e)
+		}
+	}
+
+	const getPublicTables = async (limit, page) => {
+		try {
+			const response = await axios.get('/api/table/public-tables', {
+				params : {
+					limit,
+					page
+				},
+				headers : {
+					'Authorization': `Bearer ${auth.token}`
+				},
+				withCredentials: true
+			})
+
+			return response.data
+		} catch(e) {
+			console.log(e)
+		}
+	}
+
 	const configTable = useCallback( async (defTable, defTableData) => {
 		setTable(defTable)
 		setTableData(defTableData)
@@ -309,6 +348,8 @@ export const TableProvider = ({ children }) => {
 		tableMethods: {
 			setTableData,
 			setTable,
+			getTables,
+			getPublicTables,
 			setTextAlignment,
 			setTitle,
 			setDesc,

@@ -21,7 +21,6 @@ router.post('/generate', auth, async (req, res) => {
     } = req.body
 
     const code = shortid.generate()
-		const user = await User.findOne({ _id: req.user.userId })
 		const calendar = moment().subtract(10, 'days').calendar()
 		const PM = moment().format('LT');
 		const date = `${calendar}. ${PM}`
@@ -36,14 +35,42 @@ router.post('/generate', auth, async (req, res) => {
   }
 })
 
-router.get('/', auth, async (req, res) => {
-  try {
-    const tables = await Table.find({ ownerId: req.user.userId })
+router.get('/public-tables', auth, async(req, res) => {
+	try {
+		const { limit, page } = req.query 
+
+		var skip = limit * page
+
+    if(page == -1) {
+      skip = 0
+    }
+
+    const tables = await Table.find().limit(limit).skip(skip)
 
     res.json(tables)
-  } catch (e) {
-    res.status(500).json({ message: e })
-  }
+
+	} catch(e) {
+		console.log(e)
+	}
+})
+
+router.get('/tables', auth, async(req, res) => {
+	try {
+		const { limit, page } = req.query
+
+		var skip = limit * page
+
+    if(page == -1) {
+      skip = 0
+    }
+
+    const tables = await Table.find({ownerId: req.user.userId}).limit(limit).skip(skip)
+
+    res.json(tables)
+
+	} catch(e) {
+		console.log(e)
+	}
 })
 
 router.get('/get-all', auth, async (req, res) => {

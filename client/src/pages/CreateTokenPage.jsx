@@ -3,8 +3,8 @@ import {useHttp} from '../hooks/http.hook'
 import {LoginContext} from '../context/LoginContext'
 import TokensList from '../components/TokensList/TokensList'
 import no_results from '../images/inbox.png'
-import Loader from '../components/UI/Loader/Loader'
 import Btn from '../components/UI/Btn/Btn'
+import SmallLoader from '../components/UI/Loader/SmallLoader/SmallLoader'
 const randomize = require('randomatic')
 
 export const CreateTokenPage = () => {
@@ -75,21 +75,25 @@ export const CreateTokenPage = () => {
 	useEffect( () => {
 		fetchTokens()
 	}, [fetchTokens])
-
-	if(loading) return <Loader/>
 	
 	return(
-		<div className="register-main container">
+		<div className="register-main container" style={{height: "100vh", display: "grid", alignItems: "center"}}>
 			<ul className="collection with-header">
 				<li className="collection-header"><h4>Все коды доступа: </h4></li>
 				<ul className="tokens-list">
 					{
 						tokens.length 
 							?
-							<TokensList tokens={tokens} deleteFunc={deleteToken} update={update}/>
+								loading 
+									?
+									<div style={{height: "100%", display: "grid", alignItems: "center"}}>
+										<SmallLoader/>
+									</div>
+									:
+									<TokensList tokens={tokens} deleteFunc={deleteToken} update={update}/>
 							:
-							<div style={{ textAlign: "center", color: "#fff" }} className="tokens-noop container register-main">
-								<img src={no_results} alt="" />
+							<div style={{display: "grid", height: "100%", alignItems: "center", textAlign: "center", alignContent: "center"}} className="tokens-noop container register-main">
+								<img style={{marginRight: "auto", marginLeft: "auto"}} src={no_results} alt="" />
 								<p>У вас еще нет не одного токена :(</p>
 							</div>
 					}

@@ -40,6 +40,7 @@ const Table = ({view = false}) => {
 							const styles = {
 								textAlign: textAlignment,
 								background: bg,
+								fontWeight: 'bold'
 							}
 
 							return (

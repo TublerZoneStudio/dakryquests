@@ -1,7 +1,7 @@
 import cl from './Select.module.sass'
 import { useState } from 'react'
 
-const Select = ({type, desc, defaultValue, options, onChange}) => {
+const Select = ({type, desc, defaultValue, options, onChange, customStyles = null}) => {
 
 	const [value, setValue] = useState(defaultValue)
 
@@ -15,7 +15,7 @@ const Select = ({type, desc, defaultValue, options, onChange}) => {
 
 	return (
 		<>
-			<button onClick={() => setActive(active ? false : true)} className={`${cl.Select} ${type === 'token_select' ? cl.TokenType : ''}`}>
+			<button style={customStyles && customStyles} onClick={() => setActive(active ? false : true)} className={`${cl.Select} ${type === 'token_select' ? cl.TokenType : ''}`}>
 				<div className={cl.SelectHeader}>
 					{desc}: {defaultValue ? defaultValue : value}
 
@@ -28,7 +28,7 @@ const Select = ({type, desc, defaultValue, options, onChange}) => {
 				{
 					options.map((option, index) => {
 						return (
-							<button onClick={() => callback(option.value, option.option)} className={`${cl.Option} ${type === 'token_select' ? cl.TokenType : ''}`} key={index}> 
+							<button style={customStyles && customStyles} onClick={() => callback(option.value, option.option)} className={`${cl.Option} ${type === 'token_select' ? cl.TokenType : ''}`} key={index}> 
 								{option.option}
 							</button>
 						)

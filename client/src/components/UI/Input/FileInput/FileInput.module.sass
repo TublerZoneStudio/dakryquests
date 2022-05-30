@@ -1,0 +1,39 @@
+@import '../../../../styles/variables.sass'
+
+.FileInput
+	input 
+		padding: 0px 
+		width: auto 
+		display: none
+
+	.FileInputContainer
+		background: transparent 
+		cursor: pointer
+		transition: 0.2s all ease
+
+		&:hover 
+			background: rgba(0,0,0, 0.9)
+
+			.FileBackground
+				border: 3px dashed $co
+
+				svg 
+					fill: $co
+
+		.FileBackground
+			padding: 1rem 
+			display: grid 
+			justify-content: center 
+			align-items: center 
+			border: 3px dashed #808080
+			border-radius: 7px
+			transition: 0.2s all ease
+			height: 400px
+			background-size: cover
+			background-position: center center
+
+			svg 
+				fill: #808080
+				width: 30px
+				height: 30px
+				transition: 0.2s all ease

@@ -1,18 +1,18 @@
 @import '../../../styles/variables.sass'
 
 .TableDetails 
-	background: $bg
+	background: $fg
 	display: grid 
 	grid-gap: 10px
 	color: $color
-	padding: 5px 10px
+	padding: 10px 10px
 
 	.Header 
 		display: flex 
 		justify-content: space-between 
 		align-items: center 
 		padding: 5px 10px
-		background: $fg
+		background: $bg
 		border-radius: 8px
 
 	.Body 
@@ -20,7 +20,7 @@
 		grid-gap: 10px
 		padding: 10px 
 		border-radius: 8px
-		background: $fg
+		background: $bg
 		word-break: break-all
 
 
@@ -33,13 +33,14 @@
 		display: none 
 
 		&.Active 
-			display: block
+			display: grid 
+			grid-gap: 10px
 
 		.CommentForm 
 			display: flex
 			justify-content: space-between
 			align-items: center
-			background: $fg
+			background: $bg
 			padding: 5px 15px
 			border-radius: 8px
 

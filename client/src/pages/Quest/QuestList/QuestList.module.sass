@@ -1,0 +1,23 @@
+@import '../../../styles/variables.sass'
+
+.QuestList 
+	display: grid
+	grid-gap: 1rem
+	padding: 1rem
+
+	.FilterBar 
+		background: $fg
+		padding: 1rem 
+		border-radius: 8px
+		display: flex 
+		gap: 1rem
+
+		.FilterInput 
+			max-height: 52px
+
+			&:focus
+				border-bottom: 1px solid $co
+
+@media(max-width: 850px)
+	.QuestList
+		justify-content: center

@@ -1,0 +1,77 @@
+@import '../../../../styles/variables.sass'
+
+.Wrapper 
+  display: inline-block
+  position: relative
+  width: 100%
+
+input
+  background: transparent
+  outline: none
+  padding: 16px 15px 
+  box-sizing: border-box
+  width: 100%
+  font-size: 14px
+  border: 1px solid #808080
+  border-radius: 4px
+  color: $color
+
+.Label 
+  position: absolute
+  top: 50%
+  left: 15px
+  transform: translateY(-50%)
+  line-height: 20px
+  padding: 10px 0px
+  font-size: 14px
+  color: #80868b
+  transition: all 0.2s ease-in-out
+
+
+.Label_old
+  position: absolute
+  top: 0
+  left: 10px
+  background: $fg
+  font-size: 12px
+  transform: translateY(-50%)
+  line-height: 20px
+  padding: 0px 2px
+  color: #80868b
+
+.Bar 
+  position: absolute
+  left: 50%
+  bottom: 0
+  background: $co
+  width: 0%
+  height: 2px
+  transition: all 0.2s ease-in-out
+
+
+input:focus ~ .Bar 
+  width: 100%
+  left: 0
+
+
+input:focus + .Label 
+  position: absolute
+  top: 0
+  left: 10px
+  background: $fg
+  font-size: 12px
+  transform: translateY(-50%)
+  line-height: 20px
+  padding: 0px 2px
+  color: $co
+
+input[value] + .Label
+  position: absolute
+  top: 0
+  left: 10px
+  background: $fg
+  font-size: 12px
+  transform: translateY(-50%)
+  line-height: 20px
+  padding: 0px 2px
+  color: $co

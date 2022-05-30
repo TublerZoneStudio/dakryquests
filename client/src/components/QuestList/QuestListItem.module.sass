@@ -1,0 +1,134 @@
+@import '../../styles/variables.sass'
+
+.QuestListItem
+	background: $fg
+	width: auto
+	display: flex 
+	justify-content: space-between
+	border-radius: 8px
+	transition: 0.2s all ease
+
+	.Banner 
+		width: 400px
+		height: 400px
+
+		img 
+			border-top-left-radius: 8px
+			border-bottom-left-radius: 8px
+			width: 400px
+			height: 400px
+
+	.Content
+		width: 100%
+		padding: 1rem 1rem
+		display: grid
+		align-items: center
+		align-content: space-between
+		grid-gap: 1rem
+
+		.Header 
+			display: grid 
+			grid-gap: 1rem
+			word-break: break-all
+			background: $bg
+			padding: 10px
+			border-radius: 5px
+
+			.UpdateInput 
+				padding: 3px 5px
+				border: none 
+				border-bottom: 1px solid $co 
+				background: transparent
+				width: 100%
+				height: 18px
+
+			.Title 
+				width: 100% 
+				display: flex 
+				justify-content: space-between
+				align-items: center
+
+				.UpdateInput 
+					padding: 3px 5px
+					border: none 
+					border-bottom: 1px solid $co 
+					background: transparent
+					width: 100%
+					height: 18px
+
+				h2 
+					margin: 0!important
+					font-size: 25px
+
+			span 
+				text-overflow: ellipsis
+				overflow: hidden
+				white-space: nowrap
+
+		.Body 
+			background: $bg
+			display: grid 
+			grid-gap: 1rem
+			padding: 10px
+			border-radius: 5px
+
+			.UpdateInput
+				padding: 0px 5px
+				border: none 
+				border-bottom: 1px solid $co 
+				background: transparent
+				width: 100px
+				height: 18px
+				margin: 0px 4px
+
+
+
+@media(max-width: 850px) 
+	.QuestListItem
+		display: grid
+		width: 400px
+
+		.Banner 
+			width: 400px
+			height: 400px
+
+			img 
+				border-top-left-radius: 8px
+				border-top-right-radius: 8px
+				border-bottom-left-radius: 0px
+				width: 400px
+				height: 400px
+
+
+@media(max-width: 400px) 
+	.QuestListItem
+		display: grid
+		width: 350px
+
+		.Banner 
+			width: 350px
+			height: 350px
+
+			img 
+				border-top-left-radius: 8px
+				border-top-right-radius: 8px
+				border-bottom-left-radius: 0px
+				width: 350px
+				height: 350px
+
+@media(max-width: 300px) 
+	.QuestListItem
+		display: grid
+		width: 265px
+
+		.Banner 
+			width: 265px
+			height: 265px
+
+			img 
+				border-top-left-radius: 8px
+				border-top-right-radius: 8px
+				border-bottom-left-radius: 0px
+				width: 265px
+				height: 265px
+

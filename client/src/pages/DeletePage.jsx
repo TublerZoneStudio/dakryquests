@@ -38,8 +38,8 @@ export const DeletePage = () => {
 	}
 	
 	return (
-		<div style={{ textAlign: "center", color: "#fff" }}className="container register-main">
-			<img src={rocket} alt="asad" width="220px" height="220px"/>
+		<div style={{ display: 'grid', alignItems: "center", justifyContent: "center", height: "100vh", alignContent: "center"}} className="container register-main">
+			<img src={rocket} alt="" width="220px" height="220px"/>
 			<p>{message}</p>
 		</div>
 	)	

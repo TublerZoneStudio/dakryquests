@@ -1,6 +1,6 @@
 import TokensListItem from './TokensListItem/TokensListItem'
 
-const TokensList = ({tokens, deleteFunc, update}) => {
+const TokensList = ({tokens, deleteFunc, update, loading}) => {
 
 	const preDeleteFunc = (tokenId) => {
 		deleteFunc(tokens, tokenId)
@@ -8,14 +8,16 @@ const TokensList = ({tokens, deleteFunc, update}) => {
 
 	return(
 		<>
-			{tokens.map((token) => 
-				<TokensListItem
-					key={token._id} 
-					token={token}
-					deleteFunc={preDeleteFunc}
-					update={update}
-				/>
-			)}
+			{
+				tokens.map((token) => 
+					<TokensListItem
+						key={token._id} 
+						token={token}
+						deleteFunc={preDeleteFunc}
+						update={update}
+					/>
+				)
+			}
 		</>
 	)
 }

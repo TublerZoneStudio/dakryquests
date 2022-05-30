@@ -1,0 +1,34 @@
+@import '../../../../styles/variables.sass'
+
+.FeedbackListItem 
+	display: flex 
+	justify-content: flex-start
+	gap: 1rem
+	background: $bg
+
+
+
+	.EnvelopeInner
+		min-width: 55px 
+		min-height: 55px
+		background: $co
+		display: flex 
+		align-items: center 
+		justify-content: center
+		border-top-left-radius: 5px 
+		border-bottom-left-radius: 5px
+
+		svg 
+			width: 32px 
+			height: 32px 
+			fill: $bg
+			position: relative
+			left: 0.5px
+
+	.Content 
+		width: 100%
+		padding: 5px 
+		border-radius: 5px 
+		display: grid 
+		word-break: break-all
+		gap: 1rem

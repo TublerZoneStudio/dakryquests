@@ -1,0 +1,79 @@
+@import '../../../styles/variables.sass'
+
+.ThemesSelectorInner
+	border-radius: 5px
+	display: flex 
+	justify-content: flex-start
+	max-width: 365px
+
+	.SelectorsInner 
+		display: grid
+		grid-template-columns: repeat(3, 1fr)
+		grid-gap: 5px
+
+		.Selector 	
+			background: $co 
+			border-radius: 4px 
+			color: $color 
+			display: flex 
+			justify-content: center 
+			align-items: center
+			padding: 0px 3px
+			cursor: auto
+			width: 100%
+
+			&:hover 
+				.RemoveBtn
+					visibility: visible
+					width: auto
+
+			input
+				border: none
+				padding: 2px
+
+			.RemoveBtn 
+				visibility: hidden
+				width: 0px
+				background: transparent 
+				padding: 0
+				border: none
+				cursor: pointer
+
+				svg 
+					fill: $color
+					width: 16px
+					height: 16px
+					display: grid 
+					align-items: center
+
+.MiniBtn 
+	width: 20px 
+	height: 20px 
+	background: $co
+	display: flex 
+	border-radius: 50%
+	border: none
+	color: $color
+	cursor: pointer 
+	transition: 0.2s all ease
+
+	&:hover 
+		transform: scale(1.08)
+
+	&:focus 
+		background: $co
+
+.ViewSelectors 
+	display: grid
+	grid-template-columns: repeat(3, 1fr)
+	grid-gap: 5px
+
+	.Selector 	
+		background: $co 
+		border-radius: 4px 
+		color: $color 
+		display: flex 
+		justify-content: center 
+		align-items: center
+		padding: 0px 3px
+		cursor: auto

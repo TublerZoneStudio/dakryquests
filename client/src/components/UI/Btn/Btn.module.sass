@@ -11,8 +11,16 @@
 	box-sizing: border-box 
 	transition: $transition
 
-	&:focus
-		background: $co
+	&:disabled 
+		background: transparent
+		color: $co 
+		border: 1px solid $co
+		cursor: auto
 
-	&:hover
-		background: $f-co
+	&:not(:disabled)
+
+		&:focus
+			background: $co
+
+		&:hover
+			background: $f-co
